@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block content %}
+<section class="container py-5">
+ <div class="row justify-content-center">
+  <div class="col-lg-8 text-center">
+    <h2 class="mb-4 fw-bold">Welcome to Bike-Rental</h2>
+    <p class="lead text-muted">
+      At <strong>BikeRental</strong>, we're passionate about helping you explore the world on two wheels—whether it's a short city ride or a weekend getaway.
+    </p>
+    <p class="mt-4">
+      Founded in 2025, BikeRental has become a trusted platform for affordable and convenient bike rentals. With a wide range of bikes—from city bikes to electric and mountain models—we make it easy to find the perfect ride for your journey.
+    </p>
+    <p class="mt-4">
+      Our mission is to connect riders with well-maintained, quality bikes at flexible rental durations and transparent pricing. We work with verified owners and professional fleet managers to ensure safety and comfort.
+    </p>
+    <p class="mt-4">
+      Whether you're commuting, traveling, or just looking for adventure, <strong>BikeRental</strong> is here to support your ride. Join thousands of happy riders who trust us for hassle-free bike rentals every day.
+    </p>
+    <a href="{% url 'bikelist' %}" class="btn btn-primary mt-4">Browse Bikes</a>
+  </div>
+</div>
+</section>
+{% endblock %}

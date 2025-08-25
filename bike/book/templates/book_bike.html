@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ user.username|capfirst }}'s Cart
+{% endblock %}
+
+{% block content %}
+<h2>Book {{ bike.name }}</h2>
+<p>Price per day: ₹{{ bike.price }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm Booking</button>
+</form>
+{% endblock %}

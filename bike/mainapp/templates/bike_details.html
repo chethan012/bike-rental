@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{{product.title}}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid" id="product-details">
+    <div class="row">
+        <div class="col">
+            <img src="{{bike.image.url}}" class="w-100" alt="">
+        </div>
+        <div class="col">
+            <h2>
+                {{bike.title.capitalize}}
+            </h2>
+            <p>
+                {{bike.description}}
+            </p>
+            
+            <p>
+                Rs.{{bike.rent_per_day}}
+            </p>
+
+
+            <div class="row">
+                <a href="" class="col-sm-4 btn btn-primary">Book Now</a>
+                <a href="{% url 'UpdateBike' bike.pk %}" class="col-sm-4 btn btn-warning">Update</a>
+                <a href="{% url 'DeleteBike' bike.pk %}" class="col-sm-4 btn btn-danger">Delete</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

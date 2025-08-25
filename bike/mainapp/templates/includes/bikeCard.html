@@ -1,0 +1,33 @@
+<div class="card">
+  <div class="card-img">
+    {% if bike.image %}
+    <img
+      src="{{ bike.image.url }}"
+      class="{% if not bike.availability %}disabled-img{% endif %} card-img-top fixed-img"
+      alt="{{ bike.name }}"
+    />
+    {% endif %}
+  </div>
+
+  <div class="card-body">
+    <h5 class="card-title">
+      <a
+        href="{% url 'BikeDetails' bike.id %}"
+        style="text-decoration: none; color: inherit"
+      >
+        {{ bike.model_name }}
+      </a>
+    </h5>
+
+    <p class="card-text"><strong>Price:</strong> ₹{{ bike.rent_per_day }}</p>
+    <p class="card-text">
+      {% if bike.availability  %}
+      <span class="text-info">Click below to books</span>
+      {% else %}
+      <span class="text-warning">Coming soon</span>
+      {% endif %}</p>
+    <a href="{% url 'book_bike' bike.id %}" class="btn {% if not bike.availability %}disabled btn-secondary {% else %}btn-primary{% endif %}">
+      {% if bike.availability %}Book Now{% else %}Not Available{% endif %}
+    </a>
+  </div>
+</div>

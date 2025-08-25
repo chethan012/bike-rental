@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Bike List
+{% endblock %}
+
+{% block content %}
+<section class="container py-4">
+  <div class="row g-4">
+    {% for bike in bikes %}
+      <div class="col-sm-6 col-md-4 col-lg-3 d-flex">
+        {% include 'includes/bikeCard.html' %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

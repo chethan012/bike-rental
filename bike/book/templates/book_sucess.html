@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ user.username|capfirst }}'s Cart
+{% endblock %}
+
+{% block content %}
+<h2>Booking Confirmed!</h2>
+<p>You booked: {{ booking.bike.name }}</p>
+<p>From: {{ booking.start_date }} To: {{ booking.end_date }}</p>
+<p>Total Price: ₹{{ booking.total_price }}</p>
+
+{% endblock %}

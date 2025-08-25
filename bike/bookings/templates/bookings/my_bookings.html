@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %} My Bookings {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4 fw-bold text-center">My Bookings</h2>
+
+    {% if bookings %}
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Bike</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.bike.name }}</td>
+                <td>{{ booking.start_date|date:"d M Y, H:i" }}</td>
+                <td>{{ booking.end_date|date:"d M Y, H:i" }}</td>
+                <td>₹{{ booking.amount_paid }}</td>
+                <td>{{ booking.payment_status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="text-center text-muted">No bookings yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
