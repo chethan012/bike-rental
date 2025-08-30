@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ item.car.name }} Rent Cart
+{% endblock %}
+
+{% block content %}
+<div class="book-succ">
+    <p class="text-center boo-p"> <b>Booking history</b></p>
+    <!-- <br><br><br> -->
+    
+        <table class="table-succ">
+            <thead class="text-warning">
+                <th>Sl.no</th>
+                <th>Name</th>
+                <th>Car</th>
+                <th>Price</th>
+                <th colspan="2">Booking Dates</th>
+                <th>Status</th>
+                <th>Rental Actions</th>
+                <th>Date and timing</th>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr >
+                    <td>{{booking.id}}</td>
+                    <td>{{booking.user.username}}</td>
+                    <td>{{booking.car.name}}</td>
+                    <td>{{booking.total_cost}}</td>
+                    <td>{{booking.start_date}}</td>
+                    <td>{{booking.end_date}}</td>
+                    <td>{{booking.status}}</td>
+                    <td>
+                        {% if booking.status == 'pending' %}
+                            <a href="{% url 'payment:create_razorpay_order' booking.id %}" class="text-decoration-none text-white btn btn-danger my-2 "><b>Pay now</b></a>
+                        {% else %}
+                            <a href="{% url 'rentcart' booking.car.id %}" class="text-decoration-none text-white btn btn-warning my-2" > <b>Rent again</b></a>
+                        {% endif %}
+                    </td>
+                    <td>{{booking.created_at}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+</div>
+{% endblock %}

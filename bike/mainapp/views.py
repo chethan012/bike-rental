@@ -56,3 +56,14 @@ class BikeDetails(DetailView):
   template_name = 'bike_details.html'
   fields = '__all__'
   success_url = '/'
+  
+def searchView(request):
+    query = request.GET.get('q')
+    result_bikes = Bike.objects.filter(model_name__icontains = query)
+    context = {
+        'query' : query,
+        'bikes' : result_bikes
+    }
+    template = 'search_results.html'
+
+    return render(request, template, context)

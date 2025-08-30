@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+{{ item.car.name }} Rent Cart
+{% endblock %}
+
+{% block content %}
+<div class="rent_cart_container">
+  <h1 class="rent-head">Confirm Your Rental</h1>
+
+  {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+  {% endif %}
+
+  <div class="rent-img">
+    <img  src="{{ item.bike.img.url }}" alt="{{ item.bike.name }}"  class="bg-white">
+  </div>
+  <div class="rent-row">
+  <p><strong>Bike <b class="text-warning">:</b></strong> {{ item.car.name }}</p>
+  <p><strong>Price per day <b class="text-warning">:</b></strong> ₹{{ price_per_day }}</p>
+  </div>
+  
+
+  <form method="post" class="rent-form">
+    {% csrf_token %}
+    <div class="rent-lable">
+      <label for="start_date">Start Date <b class="text-warning">:</b></label><br>
+      <input class="rent-input" type="date" id="start_date" name="start_date" required min="{{ today }}"><br><br>
+
+      <label for="end_date">End Date <b class="text-warning">:</b></label><br>
+      <input class="rent-input" type="date" id="end_date" name="end_date" required min="{{ today }}"><br><br>
+    </div>
+      
+      <p class="rent-total"><strong>Total Price <b class="text-warning">:</b></strong> ₹<span id="total_price">0.00</span></p>
+    <div class="rent-button">
+      <button type="submit" class="btn btn-warning">
+        Confirm Booking
+      </button>
+      
+       
+    </div>
+    
+  </form>
+</div>
+
+<script>
+  const pricePerDay = parseFloat('{{ price_per_day }}');
+  const startDateInput = document.getElementById('start_date');
+  const endDateInput = document.getElementById('end_date');
+  const totalPriceElement = document.getElementById('total_price');
+
+  // Set min of end_date input on load
+  endDateInput.min = "{{ today }}";
+
+  // Update end_date.min when start_date changes
+  startDateInput.addEventListener('change', function () {
+    const startDate = startDateInput.value;
+    if (startDate) {
+      endDateInput.min = startDate;
+      if (endDateInput.value < startDate) {
+        endDateInput.value = startDate;
+      }
+    } else {
+      endDateInput.min = "{{ today }}";
+    }
+    calculateTotal();
+  });
+
+  // Listen to both date fields for changes
+  endDateInput.addEventListener('change', calculateTotal);
+
+  function calculateTotal() {
+    const start = new Date(startDateInput.value);
+    const end = new Date(endDateInput.value);
+
+    if (start && end && end >= start) {
+      const diff = (end - start) / (1000 * 60 * 60 * 24);  // Days difference
+      const total = (diff > 0 ? diff : 1) * pricePerDay;
+      totalPriceElement.textContent = total.toFixed(2);
+    } else {
+      totalPriceElement.textContent = '0.00';
+    }
+  }
+</script>
+{% endblock %}

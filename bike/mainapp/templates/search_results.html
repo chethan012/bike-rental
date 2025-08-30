@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search : {{query}}
+{% endblock %}
+
+
+{% block content %}
+<section>
+    <h1>
+        Search results for : <small>{{query.capitalize}}</small>
+    </h1>
+</section>
+<section class="main-container">
+    {% for bike in bikes %}
+        {% include 'includes/bikeCard.html' %}
+    {% empty %}
+        <h2 class="text-info bg-dark">
+            No results
+        </h2>
+    {% endfor %}
+</section>
+{% endblock %}

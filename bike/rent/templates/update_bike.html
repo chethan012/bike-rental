@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="update_container">
+
+    <div class="update-row">
+        <div class="update-col1">
+            <div class="update-name1">
+                <b class="text-warning" height="100">Current car</b> : <b>{{curr_car.car.name}}</b>
+            </div>
+            <div class="update-price1">
+                <b>Price</b> : <b>{{curr_car.car.price}}</b>
+            </div>
+            <div class="update-img1">
+                <img src="{{ curr_car.car.img.url }}" alt="Current Car Image" width="300" height="400">
+            </div>
+            <div class="update-link">
+                <a href="{% url 'rentcart' curr_car.car.id %}" class="btn btn-primary"><b>Drive this</b></a>
+            </div>
+        </div>
+        <div class="update-col2">
+            <div class="update-name2">
+                <b class="text-warning">Replace with</b> : <b>{{new_car.name}}</b> 
+            </div>
+            <div class="update-price2">
+                <b>Price</b> : <b>{{new_car.price}}</b>
+            </div>
+            <div class="update-img2">
+                <img src="{{ new_car.img.url }}" width="300" height="400" alt="New Car">
+            </div>
+            <form method="post" class="update-form">
+                {% csrf_token %}
+                <button type="submit"  ><b>Replace</b></button>
+            </form>
+        </div>
+
+    </div>
+
+</div> 
+
+{% endblock %}

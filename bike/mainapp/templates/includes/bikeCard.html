@@ -26,7 +26,7 @@
       {% else %}
       <span class="text-warning">Coming soon</span>
       {% endif %}</p>
-    <a href="{% url 'book_bike' bike.id %}" class="btn {% if not bike.availability %}disabled btn-secondary {% else %}btn-primary{% endif %}">
+    <a href="{% url 'rentcart' bike.id %}" class="btn {% if not bike.availability %}disabled btn-secondary {% else %}btn-primary{% endif %}">
       {% if bike.availability %}Book Now{% else %}Not Available{% endif %}
     </a>
   </div>

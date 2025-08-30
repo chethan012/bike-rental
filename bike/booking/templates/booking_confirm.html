@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+Confirm Booking
+{% endblock %}
+
+{% block content %}
+<p class="p-book" ><b>Confirmation Details</b></p>
+<div class="com-book">
+    
+    <div class="img-book">
+        <img src="{{car.img.url}}"  alt="" >
+    </div>
+    <div class="comm-book">
+        Hi <b>{{user.username}}</b><b class="text-warning">, </b>Please confirm that you have booked Car <br> 
+        <b>Name</b> <b class="text-warning">: </b>{{car.name}} <br> 
+        <b>Total cost</b> <b class="text-warning">: </b> {{booking.total_cost}} <br>
+        <b>Date</b> <b class="text-warning">: 
+            {% if booking.start_date == booking.end_date %}
+                </b> {{booking.start_date}}</b>
+            {% else %}
+                </b> {{booking.start_date}} <b class="text-warning">To</b>  {{booking.end_date}}
+            {% endif %}
+
+    </div>
+    
+    <a href="{% url 'payment:create_razorpay_order' booking.id %}" class=" a-book text-decoration-none btn btn-warning">Pay now</a>
+    
+</div>
+{% endblock %}
+
+
+

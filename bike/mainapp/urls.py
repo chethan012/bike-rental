@@ -13,5 +13,5 @@ urlpatterns = [
   path('bikes/<int:pk>/',views.BikeDetails.as_view(), name='BikeDetails'),
   
   # path('bookings/', views.mybo, name='BikeList'),
-  # path('search/', views.search_bikes, name='search_bikes'),
+  path('search/', views.searchView, name='search_bikes'),
 ]
